@@ -35,9 +35,9 @@ public class day2year2025 {
 
     public static boolean isValidProductID(long productID) {
         String pID = productID + "";
-        String regex = "";
-        Matcher matches = Pattern.compile(regex).matcher(pID);
-        return matches.find();
+        String firstHalf = pID.substring(0, pID.length()/2);
+        String secondHalf = pID.substring(pID.length()/2);
+        return secondHalf.equals(firstHalf);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
