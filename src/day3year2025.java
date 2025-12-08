@@ -9,12 +9,18 @@ public class day3year2025 {
         // **** DO NOT EDIT ANYTHING HERE ****
         ArrayList<String> fileData = getFileData("src/data");
         int partOneAnswer = 0;
+        long partTwoAnswer = 0;
         for (String batteries : fileData) {
             int voltage = getLargestCombination(batteries);
             partOneAnswer += voltage;
         }
+        for (String batteries : fileData) {
+            long voltage = getLargestCombinationPart2(batteries);
+            partTwoAnswer += voltage;
+        }
 
         System.out.println("Part one answer: " + partOneAnswer);
+        System.out.println("Part two answer: " + partTwoAnswer);
     }
 
     // COMPLETE THIS METHOD!
@@ -37,6 +43,23 @@ public class day3year2025 {
         System.out.println(firstNum + "" + secondNum);
         System.out.println(cutStr);
         return firstNum * 10 + secondNum;
+    }
+
+    public static long getLargestCombinationPart2(String batteries) {
+        long addNum = 0;
+        long finalNum = 0;
+        String cutStr = batteries;
+        for (int a = 11; a > -1; a--) {
+            for (int i = 9; ; i--) {
+                if (cutStr.substring(0, cutStr.length() - a).contains(i + "")) {
+                    addNum = i;
+                    break;
+                }
+            }
+            cutStr = cutStr.substring(cutStr.indexOf(addNum + "") + 1);
+            finalNum = finalNum * 10 + addNum;
+        }
+        return finalNum;
     }
 
 
