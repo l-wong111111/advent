@@ -24,10 +24,18 @@ public class day1year2024 {
         data2.sort(Comparator.naturalOrder());
         System.out.println(data1);
         System.out.println(data2);
+
         int val = 0;
         for (int i = 0; i < data1.size(); i++) {
             val += Math.abs((data2.get(i) - data1.get(i)));
         }
+
+        int val2 = 0;
+        for (int i = 0; i < data1.size(); i++) {
+            int tempval = data1.get(i);
+            // add code for finding each val in data 2 that matches tempval
+        }
+
         System.out.println("Part 1 Answer = " + val);
     }
     public static ArrayList<String> getFileData(String fileName) {
