@@ -8,22 +8,41 @@ import java.util.Scanner;
 public class day5year2025 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
-        ArrayList<IngredientRange> ranges = new ArrayList<>();
         ArrayList<Long> ingredients = new ArrayList<Long>();
+        ArrayList<Long> range1 = new ArrayList<>();
+        ArrayList<Long> range2 = new ArrayList<>();
 
         for (String line : fileData) {
             if (line.contains("-")) {
                 long min = Long.parseLong(line.split("-")[0]);
                 long max = Long.parseLong(line.split("-")[1]);
                 IngredientRange i = new IngredientRange(min, max);
-                ranges.add(i);
+                range1.add(min);
+                range2.add(max);
             }
             else {
                 long number = Long.parseLong(line);
                 ingredients.add(number);
             }
         }
+        System.out.println(range1);
+        System.out.println(range2);
 
+
+        long partOneAnswer = 0;
+
+        for (int i = 0; i < ingredients.size(); i++) {
+            long val = ingredients.get(i);
+            for (int j = 0; j < range1.size(); j++) {
+                if ((val >= range1.get(j)) == (val <= range2.get(j))) {
+                    partOneAnswer++;
+                    break;
+                }
+            }
+        }
+        System.out.println(partOneAnswer);
+
+        //part 2
 
     }
 
@@ -60,5 +79,11 @@ class IngredientRange {
         return minimum + "-" + maximum;
     }
 
+    public long getMaximum() {
+        return maximum;
+    }
 
+    public long getMinimum() {
+        return minimum;
+    }
 }
