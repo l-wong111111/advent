@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 // for this Day, I made an "IngredientRange" object that holds two numbers
@@ -9,6 +11,7 @@ public class day5year2025 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
         ArrayList<Long> ingredients = new ArrayList<Long>();
+        ArrayList<IngredientRange> ranges = new ArrayList<>();
         ArrayList<Long> range1 = new ArrayList<>();
         ArrayList<Long> range2 = new ArrayList<>();
 
@@ -17,6 +20,7 @@ public class day5year2025 {
                 long min = Long.parseLong(line.split("-")[0]);
                 long max = Long.parseLong(line.split("-")[1]);
                 IngredientRange i = new IngredientRange(min, max);
+                ranges.add(i);
                 range1.add(min);
                 range2.add(max);
             }
@@ -27,6 +31,7 @@ public class day5year2025 {
         }
         System.out.println(range1);
         System.out.println(range2);
+        System.out.println(ranges);;
 
 
         long partOneAnswer = 0;
@@ -40,10 +45,18 @@ public class day5year2025 {
                 }
             }
         }
-        System.out.println(partOneAnswer);
-
+        System.out.println("p1 ans: " + partOneAnswer);
         //part 2
 
+        for (int i = 0; i < range1.size(); i++) {
+            for (int j = 0; j < range1.size(); j++) {
+                if (range1.get(i) <= range1.get(j) && range2.get(i) >= range1.get(j) && range2.get(i) <= range2.get(j)) {
+                    Collections.swap(range1, i, j);
+                }
+            }
+        }
+        System.out.println(range1);
+        System.out.println(range2);
     }
 
 
