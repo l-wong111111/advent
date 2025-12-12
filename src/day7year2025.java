@@ -7,12 +7,20 @@ public class day7year2025 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
         String[][] grid = get2DArray(fileData);
+        String position = "......................................................................|......................................................................";
+        int count = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 System.out.print(grid[i][j]);
+                if (grid[i][j].equals("^") && position.charAt(j) == '|') {
+                    count++;
+                    position = position.substring(0, j - 1) + "|.|"  + position.substring(j + 2);
+                    System.out.println();
+                }
             }
             System.out.println();
         }
+        System.out.println(count);
     }
 
     public static String[][] get2DArray(ArrayList<String> fileData) {
