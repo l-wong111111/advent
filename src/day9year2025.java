@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 public class day9year2025 {
     public static void main(String[] args) {
+        System.out.println(part1());
+        //System.out.println(part2());
+    }
+
+    public static long part1() {
         ArrayList<String> fileData = getFileData("src/data");
         ArrayList<Long> nums1 = new ArrayList<>();
         ArrayList<Long> nums2 = new ArrayList<>();
@@ -23,8 +28,25 @@ public class day9year2025 {
             }
         }
         Long largestVal = Collections.max(areas);
-        System.out.println(largestVal);
+        return largestVal;
+    }
 
+    public static long part2() {
+        ArrayList<String> fileData = getFileData("src/data");
+        ArrayList<Long> nums1 = new ArrayList<>();
+        ArrayList<Long> nums2 = new ArrayList<>();
+        ArrayList<Long> areas = new ArrayList<>();
+        for (int i = 0; i < fileData.size(); i++) {
+            nums1.add(Long.parseLong(fileData.get(i).split(",")[0]));
+            nums2.add(Long.parseLong(fileData.get(i).split(",")[1]));
+        }
+        for (int i = 0; i < nums1.size(); i++) {
+            for (int j = 0; j < nums2.size(); j++) {
+                areas.add(((Math.abs(nums1.get(i) - nums1.get(j)) + 1) * (Math.abs(nums2.get(i) - nums2.get(j)) + 1)));
+            }
+        }
+        Long largestVal = Collections.max(areas);
+        return largestVal;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
