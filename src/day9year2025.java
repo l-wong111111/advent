@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class day9year2025 {
     public static void main(String[] args) {
         System.out.println(part1());
-        //System.out.println(part2());
+        System.out.println(part2());
     }
 
     public static long part1() {
@@ -43,6 +43,7 @@ public class day9year2025 {
         for (int i = 0; i < nums1.size(); i++) {
             for (int j = 0; j < nums2.size(); j++) {
                 areas.add(((Math.abs(nums1.get(i) - nums1.get(j)) + 1) * (Math.abs(nums2.get(i) - nums2.get(j)) + 1)));
+                if (nums1.get(i).equals(nums1.get(j)) || nums2.get(i).equals(nums2.get(j))) System.out.println(nums1.get(i) + " " + nums2.get(i) + "   " + nums1.get(j) + " " + nums2.get(j));
             }
         }
         Long largestVal = Collections.max(areas);
