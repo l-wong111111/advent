@@ -3,18 +3,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CustomAdventSolution {
+public class day1year2022 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
-        long initialPyramidSize = 0;
+        int highest = 0;
+        int total = 0;
         for (int i = 0; i < fileData.size(); i++) {
-            for (String s : fileData.get(i).split("\\.")) {
-                initialPyramidSize += Long.parseLong(s);
+            if (fileData.get(i).isEmpty()) {
+                if (highest < total) highest = total;
+                total = 0;
+            } else {
+                total += Integer.parseInt(fileData.get(i));
             }
         }
-        long numOfRings = fileData.size() / 2 + 1;
-        long finalPyramidSize = (numOfRings * (2 * numOfRings + 1) * (2 * numOfRings - 1)) / 3; // sum of odd squares from 1st odd square to nth odd square is n(2n+1)(2n-1) / 3
-        System.out.println(finalPyramidSize - initialPyramidSize);
+        System.out.println(highest);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
