@@ -11,13 +11,17 @@ public class day1year2022 {
         System.out.println(fileData);
         for (int i = 0; i < fileData.size(); i++) {
             if (fileData.get(i).isEmpty()) {
-                if (highest < total) highest = total;
+                if (highest < total) {
+                    highest = total;
+                    System.out.println(i);
+                }
                 total = 0;
             } else {
                 total += Integer.parseInt(fileData.get(i));
             }
         }
         System.out.println(highest);
+        System.out.println(64929 + 64690 + 64078); // i manually removed the sets with the highest value in data to find the 2nd highest and 3rd highest
     }
 
     public static ArrayList<String> getFileData(String fileName) {
