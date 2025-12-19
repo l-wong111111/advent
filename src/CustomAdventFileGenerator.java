@@ -7,19 +7,23 @@ public class CustomAdventFileGenerator {
         String str = "";
         int ring = 0;
         int num = (size / 2) + 1;
+        int missingBoxes = 0;
+        int answer = 0;
         for (int i = 1; i <= size; i++) {
             for (int j = 1; j <= size; j++) {
                 int valI = num - Math.abs(num - i);
                 int valJ = num - Math.abs(num - j);
                 ring = Math.min(valI, valJ);
-                if (j != size) System.out.print(ring - (int) (Math.sqrt((Math.pow(Math.random(), 5) * ring + 0.9) * ring)) + ".");
-
+                missingBoxes = (int) (Math.sqrt((Math.pow(Math.random(), 5) * ring + 0.9) * ring));
+                if (j != size) System.out.print(ring - missingBoxes + ".");
                 //bug testing code below
                 //if (ring - (int) (Math.sqrt((Math.pow(Math.random(), 8) * ring + 0.9) * ring)) > ring)
                     //System.out.println("error");
                 //System.out.print(valI + ".");
+                answer += missingBoxes;
             }
-            System.out.println(ring - (int) (Math.sqrt((Math.pow(Math.random(), 5) * ring + 0.9) * ring)));
+            System.out.println(ring - missingBoxes);
         }
+        System.out.println(answer); // for seeing if solution matches answer
     }
 }
