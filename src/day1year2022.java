@@ -8,6 +8,7 @@ public class day1year2022 {
         ArrayList<String> fileData = getFileData("src/data");
         int highest = 0;
         int total = 0;
+        System.out.println(fileData);
         for (int i = 0; i < fileData.size(); i++) {
             if (fileData.get(i).isEmpty()) {
                 if (highest < total) highest = total;
@@ -26,8 +27,8 @@ public class day1year2022 {
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                if (!line.equals(""))
-                    fileData.add(line);
+                //if (!line.equals(""))
+                fileData.add(line);
             }
             return fileData;
         }
