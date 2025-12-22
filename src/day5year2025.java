@@ -11,7 +11,7 @@ public class day5year2025 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
         ArrayList<Long> ingredients = new ArrayList<Long>();
-        ArrayList<IngredientRange> ranges = new ArrayList<>();
+        ArrayList<String> ranges = new ArrayList<>();
         ArrayList<Long> range1 = new ArrayList<>();
         ArrayList<Long> range2 = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class day5year2025 {
                 long min = Long.parseLong(line.split("-")[0]);
                 long max = Long.parseLong(line.split("-")[1]);
                 IngredientRange i = new IngredientRange(min, max);
-                ranges.add(i);
+                ranges.add(i.toString());
                 range1.add(min);
                 range2.add(max);
             }
@@ -48,15 +48,29 @@ public class day5year2025 {
         System.out.println("p1 ans: " + partOneAnswer);
         //part 2
 
-        for (int i = 0; i < range1.size(); i++) {
-            for (int j = 0; j < range1.size(); j++) {
-                if (range1.get(i) <= range1.get(j) && range2.get(i) >= range1.get(j) && range2.get(i) <= range2.get(j)) {
-                    Collections.swap(range1, i, j);
+        for (int i = 0; i < ranges.size(); i++) {
+            for (int j = i; j < ranges.size(); j++) {
+                if (Long.parseLong(ranges.get(i).split("-")[1]) > Long.parseLong(ranges.get(j).split("-")[0])) {
+                    String temp = ranges.get(i);
+                    ranges.set(i, ranges.get(j));
+                    ranges.set(j, temp);
                 }
             }
         }
-        System.out.println(range1);
-        System.out.println(range2);
+        System.out.println(ranges);
+        for (int i = 0; i < ranges.size() - 1; i++) {
+            if (Long.parseLong(ranges.get(i).split("-")[1]) > Long.parseLong(ranges.get(i + 1).split("-")[0])) {
+                ranges.set(i, ranges.get(i).split("-")[0] + "-" + ranges.get(i + 1).split("-")[1]);
+                ranges.remove(i + 1);
+                i--;
+            }
+        }
+        System.out.println(ranges);
+        long count = 0;
+        for (int i = 0; i < ranges.size(); i++) {
+           count += Long.parseLong(ranges.get(i).split("-")[1]) - Long.parseLong(ranges.get(i).split("-")[0]) + 1;
+        }
+        System.out.println(count);
     }
 
 
@@ -77,26 +91,27 @@ public class day5year2025 {
             return fileData;
         }
     }
+    public static class IngredientRange {
+        public long minimum;
+        public long maximum;
+
+        public IngredientRange(long min, long max) {
+            minimum = min;
+            maximum = max;
+        }
+
+        public String toString() {
+            return minimum + "-" + maximum;
+        }
+
+        public long getMaximum() {
+            return maximum;
+        }
+
+        public long getMinimum() {
+            return minimum;
+        }
+    }
+
 }
 
-class IngredientRange {
-    public long minimum;
-    public long maximum;
-
-    public IngredientRange(long min, long max) {
-        minimum = min;
-        maximum = max;
-    }
-
-    public String toString() {
-        return minimum + "-" + maximum;
-    }
-
-    public long getMaximum() {
-        return maximum;
-    }
-
-    public long getMinimum() {
-        return minimum;
-    }
-}
