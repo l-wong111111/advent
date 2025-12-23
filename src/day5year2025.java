@@ -50,7 +50,7 @@ public class day5year2025 {
 
         for (int i = 0; i < ranges.size(); i++) {
             for (int j = i; j < ranges.size(); j++) {
-                if (Long.parseLong(ranges.get(i).split("-")[1]) > Long.parseLong(ranges.get(j).split("-")[0])) {
+                if (Long.parseLong(ranges.get(i).split("-")[0]) > Long.parseLong(ranges.get(j).split("-")[0])) {
                     String temp = ranges.get(i);
                     ranges.set(i, ranges.get(j));
                     ranges.set(j, temp);
@@ -59,8 +59,10 @@ public class day5year2025 {
         }
         System.out.println(ranges);
         for (int i = 0; i < ranges.size() - 1; i++) {
-            if (Long.parseLong(ranges.get(i).split("-")[1]) > Long.parseLong(ranges.get(i + 1).split("-")[0])) {
-                ranges.set(i, ranges.get(i).split("-")[0] + "-" + ranges.get(i + 1).split("-")[1]);
+            if (Long.parseLong(ranges.get(i).split("-")[1]) >= Long.parseLong(ranges.get(i + 1).split("-")[0])) {
+                if (Long.parseLong(ranges.get(i).split("-")[1]) <= Long.parseLong(ranges.get(i + 1).split("-")[1])) {
+                    ranges.set(i, ranges.get(i).split("-")[0] + "-" + ranges.get(i + 1).split("-")[1]);
+                }
                 ranges.remove(i + 1);
                 i--;
             }
