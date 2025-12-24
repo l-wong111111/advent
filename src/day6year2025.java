@@ -2,10 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class day6year2025 {
     public static void main(String[] args) {
+        //System.out.println(part1());
+        System.out.println(part2());
+    }
+
+    public static long part1() {
         ArrayList<String> fileData = getFileData("src/data");
         ArrayList<String> signs = new ArrayList<>();
         Integer[][] numbers = new Integer[4][1000000];
@@ -40,7 +44,48 @@ public class day6year2025 {
             if (val < 0) System.out.println(); //checks if any integers are more than 32 bit int limit which means have to change data types to long
             totalVal += val;
         }
-        System.out.println(totalVal);
+        return totalVal;
+    }
+
+    public static long part2() {
+        ArrayList<String> fileData = getFileData("src/data");
+        ArrayList<String> numbers = new ArrayList<>();
+        numbers.add(fileData.get(0));
+        numbers.add(fileData.get(1));
+        numbers.add(fileData.get(2));
+        numbers.add(fileData.get(3));
+        String signs = fileData.get(4);
+        long totalVal = 0L;
+        boolean add = true;
+        long val = 0;
+        System.out.println(signs);
+        System.out.println(numbers.get(0).length());
+        for (int i = 0; i < numbers.get(0).length(); i++) {
+            if (i < signs.length()) {
+                add = (signs.charAt(i) == '+') || (add && signs.charAt(i) == ' ');//4 variations, is +, was +, is *, was *
+            }
+            long tempVal = 0;
+            for (int j = 0; j < 4; j++) {
+                if (!numbers.get(j).substring(i, i + 1).equals(" ")) {
+                    tempVal = tempVal * 10 + Integer.parseInt(numbers.get(j).substring(i, i + 1));
+                }
+            }
+            if (add) {
+                val += tempVal;
+            } else {
+                if (val == 0) val = 1;
+                if (tempVal == 0) tempVal = 1;
+                val *= tempVal;
+            }
+            if (i < signs.length() - 1) {
+                if (signs.charAt(i + 1) == '+' || signs.charAt(i + 1) == '*') {
+                    totalVal += val;
+                    val = 0;
+                }
+            }
+            tempVal = 0;
+        }
+        return totalVal + val;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
