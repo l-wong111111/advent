@@ -37,6 +37,33 @@ public class day2year2022 {
                 if (conversion.equals("Y")) score += 6;
             }
         }
+        int score1 = score;
+        score = 0;
+        for (int i = 0; i < you.size(); i++) {
+            String conversion = "";
+            String oppVal = opp.get(i);
+            if (oppVal.equals("A")) conversion = "X";
+            if (oppVal.equals("B")) conversion = "Y";
+            if (oppVal.equals("C")) conversion = "Z";
+            if (you.get(i).equals("X")) {
+                if (conversion.equals("X")) score += 3;
+                if (conversion.equals("Y")) score += 1;
+                if (conversion.equals("Z")) score += 2;
+            }
+            if (you.get(i).equals("Y")) {
+                score += 3;
+                if (conversion.equals("X")) score += 1;
+                if (conversion.equals("Y")) score += 2;
+                if (conversion.equals("Z")) score += 3;
+            }
+            if (you.get(i).equals("Z")) {
+                score += 6;
+                if (conversion.equals("X")) score += 2;
+                if (conversion.equals("Y")) score += 3;
+                if (conversion.equals("Z")) score += 1;
+            }
+        }
+        System.out.println(score1);
         System.out.println(score);
     }
 

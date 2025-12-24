@@ -8,7 +8,7 @@ public class day6year2025 {
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/data");
         Integer[][] numbers = new Integer[3][1000000];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             String[] line = fileData.get(i).split(" ");
             for (int j = 0; j < line.length ; j++) {
                 numbers[i][j] = Integer.parseInt(line[j]);
