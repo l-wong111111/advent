@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class day8year2025 {
@@ -13,12 +14,10 @@ public class day8year2025 {
         ArrayList<String> fileData = getFileData("src/data");
         System.out.println(fileData);
         long totalVal = 0;
-        long val1 = 0;
-        long val2 = 0;
-        long val3 = 0;
         ArrayList<Double> distances = new ArrayList<>();
         ArrayList<String> pairs = new ArrayList<>();
         ArrayList<String> pairs2 = new ArrayList<>();
+        ArrayList<Integer> pairsizes = new ArrayList<>();
         for (int i = 0; i < fileData.size(); i++) {
             for (int j = i + 1; j < fileData.size(); j++) {
                 distances.add(getDistance(fileData.get(i), fileData.get(j)));
@@ -26,21 +25,45 @@ public class day8year2025 {
             }
         }
         System.out.println(pairs);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(Collections.min(distances));
             int minIndex = distances.indexOf(Collections.min(distances));
             pairs2.add(pairs.get(minIndex));
             distances.remove(minIndex);
+            pairs.remove(minIndex);
         }
         System.out.println(pairs2);
         while (!pairs2.isEmpty()) {
             ArrayList<Integer> nums = new ArrayList<>();
-            nums.add(Integer.parseInt());
-            nums.add(Integer.parseInt());
-            for (int i = 0; i < pairs2.size(); i++) {
-                if
+            ArrayList<Integer> nums2 = new ArrayList<>();
+            nums.add(Integer.parseInt(pairs2.get(0).split(",")[0]));
+            nums.add(Integer.parseInt(pairs2.get(0).split(",")[1]));
+            pairs2.remove(0);
+            boolean foundNewPair = true;
+            while (foundNewPair) {
+                foundNewPair = false;
+                for (int i = 0; i < pairs2.size(); i++) {
+                    int object1 = Integer.parseInt(pairs2.get(i).split(",")[0]);
+                    int object2 = Integer.parseInt(pairs2.get(i).split(",")[1]);
+                    if (nums.contains(object1) || nums.contains(object2)) {
+                        foundNewPair = true;
+                        nums.add(object1);
+                        nums.add(object2);
+                        pairs2.remove(i);
+                    }
+                }
             }
+            for (int i = 0; i < nums.size() ; i++) {
+                if (!nums2.contains(nums.get(i))) {
+                    nums2.add(nums.get(i));
+                }
+            }
+            System.out.println(nums2);
+            pairsizes.add(nums2.size());
         }
-        totalVal = val1 * val2 * val3;
+        System.out.println(pairsizes);
+        pairsizes.sort(Comparator.reverseOrder());
+        totalVal = (long) pairsizes.get(0) * pairsizes.get(1) * pairsizes.get(2);
         return totalVal;
     }
 
