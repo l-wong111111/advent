@@ -72,14 +72,14 @@ public class day9year2025 {
             }
         }
         System.out.println(connections);
-        for (int i = 0; i < connectionPoints.size(); i++) {
-            int xVal = Integer.parseInt(connectionPoints.get(i).split(",")[0]);
-            int yVal = Integer.parseInt(connectionPoints.get(i).split(",")[1]);
-            map[xVal][yVal] = "X";
-            for (int j = ; j < ; j++) {
-
-            }
-        }
+//        for (int i = 0; i < connectionPoints.size(); i++) {
+//            int xVal = Integer.parseInt(connectionPoints.get(i).split(",")[0]);
+//            int yVal = Integer.parseInt(connectionPoints.get(i).split(",")[1]);
+//            map[xVal][yVal] = "X";
+//            for (int j = ; j < ; j++) {
+//
+//            }
+//        }
         return 2;
     }
 
