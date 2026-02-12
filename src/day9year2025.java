@@ -1,13 +1,15 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+import javax.swing.*;
 
-public class day9year2025 {
+public class day9year2025 extends JPanel{
     public static void main(String[] args) {
-        System.out.println(part1());
+        //System.out.println(part1());
         System.out.println(part2());
     }
 
@@ -59,19 +61,22 @@ public class day9year2025 {
 
         for (int i = 0; i < nums1.size(); i++) {
             for (int j = i + 1; j < nums1.size(); j++) {
-                if (nums1.get(i) == nums1.get(j)) {
+                if (nums1.get(i).equals(nums1.get(j))) {
                     connections.add(fileData.get(i) + " " + fileData.get(j));
                     connectionPoints.add(fileData.get(i));
                     connectionPoints.add(fileData.get(j));
+
                 }
-                if (nums2.get(i) == nums2.get(j)) {
+                if (nums2.get(i).equals(nums2.get(j))) {
                     connections.add(fileData.get(i) + " " + fileData.get(j));
                     connectionPoints.add(fileData.get(i));
                     connectionPoints.add(fileData.get(j));
                 }
             }
         }
+
         System.out.println(connections);
+        System.out.println(connectionPoints);
 //        for (int i = 0; i < connectionPoints.size(); i++) {
 //            int xVal = Integer.parseInt(connectionPoints.get(i).split(",")[0]);
 //            int yVal = Integer.parseInt(connectionPoints.get(i).split(",")[1]);
@@ -98,5 +103,11 @@ public class day9year2025 {
         catch (FileNotFoundException e) {
             return fileData;
         }
+    }
+
+    public void paint(Graphics g, int x1, int x2, int y1, int y2)
+    {
+        super.paintComponent(g);
+        g.drawLine(x1, x2, y1, y2);
     }
 }
