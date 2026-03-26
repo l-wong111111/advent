@@ -34,9 +34,15 @@ public class day1year2024 {
         for (int i = 0; i < data1.size(); i++) {
             int tempval = data1.get(i);
             // add code for finding each val in data 2 that matches tempval
+            int count = 0;
+            for (int j = 0; j < data2.size(); j++) {
+                if (tempval == data2.get(j)) count++;
+            }
+            val2 += (tempval * count);
         }
 
         System.out.println("Part 1 Answer = " + val);
+        System.out.println("Part 2 Answer = " + val2);
     }
     public static ArrayList<String> getFileData(String fileName) {
             ArrayList<String> fileData = new ArrayList<String>();
