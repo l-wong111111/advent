@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class day3year2024 {
     public static void main(String[] args) {
         System.out.println(part1());
+        System.out.println(part2());
     }
 
     public static int part1() {
@@ -37,6 +38,49 @@ public class day3year2024 {
             }
         }
         System.out.println(list);
+        for (int i = 0; i < list.size(); i++) {
+            int v1 = Integer.parseInt(list.get(i).split(",")[0]);
+            int v2 = Integer.parseInt(list.get(i).split(",")[1]);
+            ans += (v1 * v2);
+        }
+        return ans;
+    }
+
+    public static int part2() {
+        int ans = 0;
+        ArrayList<String> fileData = getFileData("src/data");
+        ArrayList<String> list = new ArrayList<>();
+        boolean valid2 = true;
+        for (int i = 0; i < fileData.size(); i++) {
+            String line = fileData.get(i);
+            for (int j = 0; j < line.length(); j++) {
+                if (!line.substring(j).contains("mul(")) {
+                    break;
+                }
+                if (line.substring(j, j + 2).equals("do")) {
+                    valid2 = true;
+                }
+                if (line.substring(j, j + 5).equals("don't")) {
+                    valid2 = false;
+                }
+                if (line.substring(j, j + 4).equals("mul(")) {
+                    int val = j + 4;
+                    char character = line.charAt(val);
+                    boolean valid = true;
+                    while (!(character == ')') ) {
+                        if (!Character.isDigit(character) && !(character == ',')) {
+                            valid = false;
+                            break;
+                        }
+                        val++;
+                        character = line.charAt(val);
+                    }
+                    if (valid && valid2) {
+                        list.add(line.substring(j + 4, val));
+                    }
+                }
+            }
+        }
         for (int i = 0; i < list.size(); i++) {
             int v1 = Integer.parseInt(list.get(i).split(",")[0]);
             int v2 = Integer.parseInt(list.get(i).split(",")[1]);
