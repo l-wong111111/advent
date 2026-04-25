@@ -28,8 +28,7 @@ public class aTemplate {
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                if (!line.equals(""))
-                    fileData.add(line);
+                fileData.add(line);
             }
             return fileData;
         }
