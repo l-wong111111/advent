@@ -80,10 +80,10 @@ public class day6year2024 {
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-//                System.out.print(map[i][j]);
+                System.out.print(map[i][j]);
                 if (map[i][j].equals("x")) ans++;
             }
-//            System.out.println();
+            System.out.println();
         }
         return ans + 1;
     }
@@ -117,11 +117,15 @@ public class day6year2024 {
                 int yPos = initYPos;
                 map[rows][cols] = "#";
                 int count = 0;
+                int steps = 0;
 
                 boolean outOfBounds = false;
                 String type = "up";
                 while (!outOfBounds) {
+                    steps++;
                     try {
+                        //im guessing 112, 15 puts you in a different loop that doesnt involve the blockade placed
+//                        if (ans == 58) System.out.println(rows + " " + cols);
                         if (type.equals("up")) {
                             if (map[yPos - 1][xPos].equals("#")) {
                                 type = "right";
@@ -161,7 +165,7 @@ public class day6year2024 {
                     } catch (Exception e) {
                         outOfBounds = true;
                     }
-                    if (count == 2) {
+                    if (count >= 2 || steps > 1000000) {
                         ans++;
                         System.out.println(ans);
                         break;
