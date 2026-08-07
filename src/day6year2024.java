@@ -116,7 +116,6 @@ public class day6year2024 {
                 int xPos = initXPos;
                 int yPos = initYPos;
                 map[rows][cols] = "#";
-                int count = 0;
                 int steps = 0;
 
                 boolean outOfBounds = false;
@@ -165,7 +164,7 @@ public class day6year2024 {
                     } catch (Exception e) {
                         outOfBounds = true;
                     }
-                    if (count >= 2 || steps > 1000000) {
+                    if (steps > 1000000) {
                         ans++;
                         System.out.println(ans);
                         break;
