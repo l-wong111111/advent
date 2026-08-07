@@ -13,6 +13,7 @@ public class day5year2024 {
     public static int part1() {
         int ans = 0;
         boolean a = true;
+        //list 1 is ordering rule list, list 2 is page numbers
         ArrayList<String[]> list1 = new ArrayList<>();
         ArrayList<String[]> list2 = new ArrayList<>();
         ArrayList<String> fileData = getFileData("src/data");
@@ -52,7 +53,8 @@ public class day5year2024 {
                 }
             }
             if (isValid) {
-                System.out.println(Arrays.toString(list2.get(i)));
+                //System.out.println(Arrays.toString(list2.get(i)));
+                System.out.print(i + "  ");
                 int pos = list2.get(i).length / 2;
                 ans += Integer.parseInt(list2.get(i)[pos]);
             }
@@ -78,6 +80,7 @@ public class day5year2024 {
             }
         }
         for (int i = 0; i < list2.size(); i++) {
+            int midval = 0;
             boolean isValid = true;
             for (int j = 0; j < list1.size(); j++) {
                 String left = list1.get(j)[0];
@@ -94,11 +97,44 @@ public class day5year2024 {
                     break;
                 }
             }
-            if (isValid) {
-                System.out.println(Arrays.toString(list2.get(i)));
-                int pos = list2.get(i).length / 2;
-                ans += Integer.parseInt(list2.get(i)[pos]);
+            if (!isValid) {
+//              System.out.println(Arrays.toString(list2.get(i)));
+                while (!isValid) {
+                   // System.out.println("a");
+                    String[] pageNums = list2.get(i).clone(); // this clone is very important
+                    //System.out.println(Arrays.toString(pageNums));
+                    String[] randomizedPageNums = new String[pageNums.length];
+                    for (int j = 0; j < randomizedPageNums.length; j++) {
+                        int randomInt = (int) (Math.random() * pageNums.length);
+                        while (pageNums[randomInt].equals("pluh")) {
+                            randomInt = (int) (Math.random() * pageNums.length);
+                        }
+                        randomizedPageNums[j] = pageNums[randomInt];
+                        pageNums[randomInt] = "pluh";
+                    }
+                    //System.out.println("pass");
+                    midval = Integer.parseInt(randomizedPageNums[randomizedPageNums.length / 2]);
+                    isValid = true;
+                    for (int j = 0; j < list1.size(); j++) {
+                        String left = list1.get(j)[0];
+                        String right = list1.get(j)[1];
+                        int idxleft = -1;
+                        int idxright = -1;
+                        for (int k = 0; k < randomizedPageNums.length; k++) {
+                            if (randomizedPageNums[k].equals(left)) idxleft = k;
+                            if (randomizedPageNums[k].equals(right)) idxright = k;
+                        }
+                        if (idxleft > idxright) {
+                            if (idxright == -1) continue;
+                            isValid = false;
+                            break;
+                        }
+                    }
+                    //System.out.print(isValid);
+                }
             }
+            ans += midval;
+            System.out.println(midval);
         }
         return ans;
     }
