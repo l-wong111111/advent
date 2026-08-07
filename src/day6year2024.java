@@ -128,7 +128,7 @@ public class day6year2024 {
                         if (type.equals("up")) {
                             if (map[yPos - 1][xPos].equals("#")) {
                                 type = "right";
-                                if (yPos - 1 == rows && xPos == cols) count++;
+                                if (yPos - 1 == rows && xPos == cols);
                                 continue;
                             }
                             yPos -= 1;
@@ -137,7 +137,7 @@ public class day6year2024 {
                         if (type.equals("right")) {
                             if (map[yPos][xPos + 1].equals("#")) {
                                 type = "down";
-                                if (yPos == rows && xPos + 1 == cols) count++;
+                                if (yPos == rows && xPos + 1 == cols);
                                 continue;
                             }
                             xPos += 1;
@@ -146,7 +146,7 @@ public class day6year2024 {
                         if (type.equals("down")) {
                             if (map[yPos + 1][xPos].equals("#")) {
                                 type = "left";
-                                if (yPos + 1 == rows && xPos == cols) count++;
+                                if (yPos + 1 == rows && xPos == cols);
                                 continue;
                             }
                             yPos += 1;
@@ -155,7 +155,7 @@ public class day6year2024 {
                         if (type.equals("left")) {
                             if (map[yPos][xPos - 1].equals("#")) {
                                 type = "up";
-                                if (yPos == rows && xPos - 1 == cols) count++;
+                                if (yPos == rows && xPos - 1 == cols);
                                 continue;
                             }
                             xPos -= 1;
