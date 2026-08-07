@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class day5year2024 {
@@ -99,35 +98,25 @@ public class day5year2024 {
             }
             if (!isValid) {
 //              System.out.println(Arrays.toString(list2.get(i)));
+                String[] newPageNums = list2.get(i).clone(); // this clone is very important
                 while (!isValid) {
-                   // System.out.println("a");
-                    String[] pageNums = list2.get(i).clone(); // this clone is very important
-                    //System.out.println(Arrays.toString(pageNums));
-                    String[] randomizedPageNums = new String[pageNums.length];
-                    for (int j = 0; j < randomizedPageNums.length; j++) {
-                        int randomInt = (int) (Math.random() * pageNums.length);
-                        while (pageNums[randomInt].equals("pluh")) {
-                            randomInt = (int) (Math.random() * pageNums.length);
-                        }
-                        randomizedPageNums[j] = pageNums[randomInt];
-                        pageNums[randomInt] = "pluh";
-                    }
-                    //System.out.println("pass");
-                    midval = Integer.parseInt(randomizedPageNums[randomizedPageNums.length / 2]);
+                    midval = Integer.parseInt(newPageNums[newPageNums.length / 2]);
                     isValid = true;
                     for (int j = 0; j < list1.size(); j++) {
                         String left = list1.get(j)[0];
                         String right = list1.get(j)[1];
                         int idxleft = -1;
                         int idxright = -1;
-                        for (int k = 0; k < randomizedPageNums.length; k++) {
-                            if (randomizedPageNums[k].equals(left)) idxleft = k;
-                            if (randomizedPageNums[k].equals(right)) idxright = k;
+                        for (int k = 0; k < newPageNums.length; k++) {
+                            if (newPageNums[k].equals(left)) idxleft = k;
+                            if (newPageNums[k].equals(right)) idxright = k;
                         }
                         if (idxleft > idxright) {
                             if (idxright == -1) continue;
+                            String temp = newPageNums[idxleft];
+                            newPageNums[idxleft] = newPageNums[idxright];
+                            newPageNums[idxright] = temp;
                             isValid = false;
-                            break;
                         }
                     }
                     //System.out.print(isValid);
