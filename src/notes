@@ -1,0 +1,4 @@
+i should of added this earlier lmao
+
+when cloning 2d arrays, cloning only affects the rows, its still an array of references,
+you need to make a loop of cloning each inner array (day 6 year 2024)
