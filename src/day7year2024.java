@@ -41,8 +41,8 @@ public class day7year2024 {
         return ans;
     }
 
-    public static int part2() {
-        int ans = 0;
+    public static long part2() {
+        long ans = 0;
         ArrayList<String> fileData = getFileData("src/data");
         for (int i = 0; i < fileData.size(); i++) {
             long val = Long.parseLong(fileData.get(i).split(":")[0]);
